@@ -46,6 +46,11 @@ public class ShoeServiceImpl implements ShoeService {
         return shoeRepository.findAllBySize(size);
     }
 
+    @Override
+    public List<Shoe> findByColor(String color) {
+        return shoeRepository.findAllByColor(color);
+    }
+
     private Shoe mapShoeFoundByShoeInParamter(Shoe shoe, Shoe shoeInDB) {
 
         shoeInDB.setBrand(shoe.getBrand());

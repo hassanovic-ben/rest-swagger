@@ -12,4 +12,5 @@ public interface ShoeService {
     Shoe updateShoe(Shoe shoe);
     Shoe shoeFound(Long id);
     List<Shoe> findBySize(Integer size);
+    List<Shoe> findByColor(String color);
 }

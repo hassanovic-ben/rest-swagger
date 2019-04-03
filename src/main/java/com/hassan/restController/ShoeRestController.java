@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -19,13 +21,13 @@ public class ShoeRestController {
 
     @PostMapping("/shoe")
     @ApiOperation(value = "Add a shoe into data base")
-    public Shoe addShoe(@RequestBody Shoe shoe){
+    public ResponseEntity addShoe(@RequestBody Shoe shoe){
 
         Shoe shoeAdded = shoeService.addShoe(shoe);
         if(shoeAdded == null)
-            return null;
+            return new ResponseEntity("shoe can not be added ", HttpStatus.INTERNAL_SERVER_ERROR);
         else
-            return shoeAdded;
+            return new ResponseEntity(shoeAdded,HttpStatus.OK);
     }
 
     @GetMapping("/shoes")
@@ -36,19 +38,42 @@ public class ShoeRestController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    private List<Shoe> getAll(){
+    public ResponseEntity getAll(){
 
         List<Shoe> shoeList = shoeService.getAll();
-        return shoeList;
+        if(shoeList.size() == 0)
+            return new ResponseEntity("The list is empty",HttpStatus.ACCEPTED);
+
+
+        return new ResponseEntity(shoeList,HttpStatus.OK);
     }
+
+
+    @GetMapping("/shoe/{color}")
+    @ApiOperation(value = "Find the list by Color")
+    public ResponseEntity getShoesByColor(@PathVariable("color") String color){
+
+        List<Shoe> shoesList = shoeService.findByColor(color);
+        if(shoesList.size() ==0){
+            return new ResponseEntity("No shoe found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(shoesList,HttpStatus.OK);
+
+    }
+
 
 
     @GetMapping("/shoes/{id}")
     @ApiOperation(value = "find shoe by Id")
-    public Shoe getShoeById(@PathVariable("id") Long id){
+    public ResponseEntity getShoeById(@PathVariable("id") Long id){
 
         Shoe foundShoe = shoeService.shoeFound(id);
-        return foundShoe;
+        if(foundShoe==null){
+            return new ResponseEntity("Shoe not found ",HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(foundShoe,HttpStatus.OK);
     }
 
     @DeleteMapping("/shoes/{id}")

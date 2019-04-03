@@ -20,4 +20,5 @@ public interface ShoeRepository extends CrudRepository<Shoe,Long> {
     void deleteShoeByIdShoe(Long idShoe);
     Shoe findShoeByIdShoe(Long idShoe);
     List<Shoe> findAllBySize(Integer size);
+    List<Shoe> findAllByColor(String color);
 }
