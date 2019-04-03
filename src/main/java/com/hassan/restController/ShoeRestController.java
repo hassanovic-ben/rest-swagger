@@ -18,7 +18,7 @@ public class ShoeRestController {
     private ShoeServiceImpl shoeService;
 
     @PostMapping("/shoe")
-    @ApiOperation(value = "Add a shoe")
+    @ApiOperation(value = "Add a shoe into data base")
     public Shoe addShoe(@RequestBody Shoe shoe){
 
         Shoe shoeAdded = shoeService.addShoe(shoe);
