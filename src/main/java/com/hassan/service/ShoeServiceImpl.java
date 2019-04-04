@@ -37,7 +37,7 @@ public class ShoeServiceImpl implements ShoeService {
     }
 
     @Override
-    public Shoe shoeFound(Long id) {
+    public Shoe getShoeById(Long id) {
         return shoeRepository.findShoeByIdShoe(id);
     }
 

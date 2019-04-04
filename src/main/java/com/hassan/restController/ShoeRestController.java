@@ -48,7 +48,6 @@ public class ShoeRestController {
         return new ResponseEntity(shoeList,HttpStatus.OK);
     }
 
-
     @GetMapping("/shoe/{color}")
     @ApiOperation(value = "Find the list by Color")
     public ResponseEntity getShoesByColor(@PathVariable("color") String color){
@@ -62,13 +61,11 @@ public class ShoeRestController {
 
     }
 
-
-
     @GetMapping("/shoes/{id}")
     @ApiOperation(value = "find shoe by Id")
     public ResponseEntity getShoeById(@PathVariable("id") Long id){
 
-        Shoe foundShoe = shoeService.shoeFound(id);
+        Shoe foundShoe = shoeService.getShoeById(id);
         if(foundShoe==null){
             return new ResponseEntity("Shoe not found ",HttpStatus.NOT_FOUND);
         }
@@ -78,14 +75,20 @@ public class ShoeRestController {
 
     @DeleteMapping("/shoes/{id}")
     @ApiOperation(value = "delete shoe by Id")
-    public void deleteShoe(@PathVariable("id") Long id){
+    public ResponseEntity deleteShoe(@PathVariable("id") Long id){
+
+        Shoe shoe = shoeService.getShoeById(id);
+        if(shoe== null)
+            return new ResponseEntity("Shoe with id : " + id + " is not exist", HttpStatus.NOT_FOUND);
 
         try {
-            Long deleteShoe = shoeService.deleteShoe(id);
+            Long deleteShoe = shoeService.deleteShoe(shoe.getIdShoe());
+            return new ResponseEntity("shoe with id : " + id + " is deleted " , HttpStatus.OK);
         }
         catch (Exception ex){
             ex.printStackTrace();
         }
+        return new ResponseEntity("This shoe can not be deleted !! " , HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

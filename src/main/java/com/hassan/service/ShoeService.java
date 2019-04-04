@@ -10,7 +10,7 @@ public interface ShoeService {
     Shoe addShoe(Shoe shoe);
     Long deleteShoe(Long  idShoe);
     Shoe updateShoe(Shoe shoe);
-    Shoe shoeFound(Long id);
+    Shoe getShoeById(Long id);
     List<Shoe> findBySize(Integer size);
     List<Shoe> findByColor(String color);
 }
