@@ -9,14 +9,11 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-
-public interface ShoeRepository extends CrudRepository<Shoe,Long> {
-
+@Transactional
+public interface ShoeRepository extends JpaRepository<Shoe,Long> {
 
     List<Shoe> findAll();
-    @Transactional
     Shoe saveAndFlush(Shoe shoe);
-    @Transactional
     void deleteShoeByIdShoe(Long idShoe);
     Shoe findShoeByIdShoe(Long idShoe);
     List<Shoe> findAllBySize(Integer size);
