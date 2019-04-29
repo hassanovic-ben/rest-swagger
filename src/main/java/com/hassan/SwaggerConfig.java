@@ -26,6 +26,8 @@ public class SwaggerConfig {
                 .build().apiInfo(apiEndPointsInfo());
     }
 
+
+
     private ApiInfo apiEndPointsInfo() {
         return new ApiInfoBuilder().title("Spring Boot REST API")
                 .description("Shoes Management REST API")

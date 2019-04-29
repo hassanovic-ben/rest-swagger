@@ -11,6 +11,7 @@ import javax.persistence.Id;
 @ApiModel(description = "All details about the Shoe. ")
 public class Shoe {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty(notes = "The database generated shoe ID")
