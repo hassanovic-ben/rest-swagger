@@ -12,6 +12,7 @@ import java.util.List;
 @Transactional
 public interface ShoeRepository extends JpaRepository<Shoe,Long> {
 
+
     List<Shoe> findAll();
     Shoe saveAndFlush(Shoe shoe);
     void deleteShoeByIdShoe(Long idShoe);

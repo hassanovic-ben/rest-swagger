@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public class ShoeServiceImpl implements ShoeService {
 
+
     @Autowired
     private ShoeRepository shoeRepository;
 
