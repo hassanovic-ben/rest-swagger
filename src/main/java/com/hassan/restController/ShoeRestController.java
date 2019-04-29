@@ -19,6 +19,11 @@ public class ShoeRestController {
     @Autowired
     private ShoeServiceImpl shoeService;
 
+    /**
+     * addShoe method will add a new shoe into data base
+     * @param shoe
+     * @return
+     */
     @PostMapping("/shoe")
     @ApiOperation(value = "Add a shoe into data base")
     public ResponseEntity addShoe(@RequestBody Shoe shoe){
@@ -30,6 +35,10 @@ public class ShoeRestController {
             return new ResponseEntity(shoeAdded,HttpStatus.OK);
     }
 
+    /**
+     * getAll method gets all shoes from DB
+     * @return
+     */
     @GetMapping("/shoes")
     @ApiOperation(value = "View of all shoes available", response = List.class)
     @ApiResponses(value = {
@@ -48,6 +57,12 @@ public class ShoeRestController {
         return new ResponseEntity(shoeList,HttpStatus.OK);
     }
 
+    /**
+     * Get the shoes list by the specific
+     * color passed in argument
+     * @param color
+     * @return
+     */
     @GetMapping("/shoe/{color}")
     @ApiOperation(value = "Find the list by Color")
     public ResponseEntity getShoesByColor(@PathVariable("color") String color){
@@ -61,6 +76,13 @@ public class ShoeRestController {
 
     }
 
+    /**
+     * getShoeById gets Shoe By Id
+     *
+     * @param id
+     * @return
+     */
+
     @GetMapping("/shoes/{id}")
     @ApiOperation(value = "find shoe by Id")
     public ResponseEntity getShoeById(@PathVariable("id") Long id){
@@ -73,6 +95,11 @@ public class ShoeRestController {
         return new ResponseEntity(foundShoe,HttpStatus.OK);
     }
 
+    /**
+     * deleteShoe deletes a shoe by id
+     * @param id
+     * @return ResponseEntity
+     */
     @DeleteMapping("/shoes/{id}")
     @ApiOperation(value = "delete shoe by Id")
     public ResponseEntity deleteShoe(@PathVariable("id") Long id){
