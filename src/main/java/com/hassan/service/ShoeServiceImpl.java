@@ -4,12 +4,10 @@ import com.hassan.model.Shoe;
 import com.hassan.repository.ShoeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class ShoeServiceImpl implements ShoeService {
-
 
     @Autowired
     private ShoeRepository shoeRepository;

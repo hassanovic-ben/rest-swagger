@@ -78,12 +78,11 @@ public class ShoeRestController {
 
     /**
      * getShoeById gets Shoe By Id
-     *
      * @param id
      * @return
      */
 
-    @GetMapping("/shoes/{id}")
+    @GetMapping("/shoe/{id}")
     @ApiOperation(value = "find shoe by Id")
     public ResponseEntity getShoeById(@PathVariable("id") Long id){
 
@@ -116,6 +115,26 @@ public class ShoeRestController {
             ex.printStackTrace();
         }
         return new ResponseEntity("This shoe can not be deleted !! " , HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+    /**
+     * getShoeBySize gets a
+     * list of shoes by size
+     * @param size
+     * @return ResponseEntity
+     */
+
+    @GetMapping("/shoes/{size}")
+    @ApiOperation(value = "find shoe by Size")
+    public ResponseEntity getShoeBySize(@PathVariable("size") Integer size){
+
+        List<Shoe> shoesBySize = shoeService.findBySize(size);
+        if(shoesBySize==null){
+            return new ResponseEntity("Shoes not found ",HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(shoesBySize,HttpStatus.OK);
     }
 
 }

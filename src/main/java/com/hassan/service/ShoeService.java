@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface ShoeService {
 
-
     List<Shoe> getAll();
     Shoe addShoe(Shoe shoe);
     Long deleteShoe(Long  idShoe);

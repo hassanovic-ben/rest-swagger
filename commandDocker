@@ -3,7 +3,7 @@ docker run -p 5000:8080 <ID_IMAGE>
 
 docker run --name=test-mysql --env="MYSQL_ROOT_PASSWORD=root" mysql
 
-docker run --name demo-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=note_note -e MYSQL_USER=root -e MYSQL_PASSWORD=root -d mysql:8.0.15
+docker run --name demo-mysql -e MYSQL_ROOT_PASSWORD= -e MYSQL_DATABASE=note_note -e MYSQL_USER=root -e MYSQL_PASSWORD= -d mysql:8.0.15
 
 docker images
 
