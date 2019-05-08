@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -53,7 +55,6 @@ public class ShoeRestController {
         if(shoeList.size() == 0)
             return new ResponseEntity("The list is empty",HttpStatus.ACCEPTED);
 
-
         return new ResponseEntity(shoeList,HttpStatus.OK);
     }
 
@@ -63,7 +64,7 @@ public class ShoeRestController {
      * @param color
      * @return
      */
-    @GetMapping("/shoe/{color}")
+    @GetMapping("/shoe/find/color/{color}")
     @ApiOperation(value = "Find the list by Color")
     public ResponseEntity getShoesByColor(@PathVariable("color") String color){
 
@@ -71,9 +72,7 @@ public class ShoeRestController {
         if(shoesList.size() ==0){
             return new ResponseEntity("No shoe found", HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity(shoesList,HttpStatus.OK);
-
     }
 
     /**
@@ -82,9 +81,9 @@ public class ShoeRestController {
      * @return
      */
 
-    @GetMapping("/shoe/{id}")
+    @GetMapping("/shoe/find/id/{id}")
     @ApiOperation(value = "find shoe by Id")
-    public ResponseEntity getShoeById(@PathVariable("id") Long id){
+    public ResponseEntity getShoeById(@PathParam("id") Long id){
 
         Shoe foundShoe = shoeService.getShoeById(id);
         if(foundShoe==null){
@@ -135,6 +134,25 @@ public class ShoeRestController {
         }
 
         return new ResponseEntity(shoesBySize,HttpStatus.OK);
+    }
+
+
+    /**
+     * updateShoe method will update an existing shoe
+     * in data base.
+     * @param shoe
+     * @return
+     */
+    @PutMapping("/shoe")
+    @ApiOperation(value = "Update a shoe In Data Base")
+    public ResponseEntity updateShoe(@RequestBody Shoe shoe){
+
+        Shoe shoeAdded = shoeService.updateShoe(shoe);
+        if(shoeAdded == null)
+            return new ResponseEntity("shoe can not be updated ", HttpStatus.INTERNAL_SERVER_ERROR);
+        else
+            return new ResponseEntity(shoeAdded,HttpStatus.OK);
+
     }
 
 }

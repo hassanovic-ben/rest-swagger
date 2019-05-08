@@ -1,9 +1,7 @@
-package com.hassan.servicemockito;
+package com.hassan.service;
 
 import com.hassan.model.Shoe;
 import com.hassan.repository.ShoeRepository;
-import com.hassan.service.ShoeService;
-import com.hassan.service.ShoeServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

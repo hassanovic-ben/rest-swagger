@@ -17,5 +17,5 @@ public interface ShoeRepository extends JpaRepository<Shoe,Long> {
     void deleteShoeByIdShoe(Long idShoe);
     Shoe findShoeByIdShoe(Long idShoe);
     List<Shoe> findAllBySize(Integer size);
-    List<Shoe> findAllByColor(String color);
+    List<Shoe> findByColor(String color);
 }

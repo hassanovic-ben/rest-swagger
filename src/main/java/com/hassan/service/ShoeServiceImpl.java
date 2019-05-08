@@ -31,8 +31,8 @@ public class ShoeServiceImpl implements ShoeService {
     @Override
     public Shoe updateShoe(Shoe shoe) {
         Shoe shoeInDB = shoeRepository.findShoeByIdShoe(shoe.getIdShoe());
-        Shoe shoeUpdated = mapShoeFoundByShoeInParamter(shoe, shoeInDB);
-        return shoeUpdated;
+        Shoe shoeUpdated = mapShoeFoundByShoeInParameter(shoe, shoeInDB);
+        return shoeRepository.saveAndFlush(shoeUpdated);
     }
 
     @Override
@@ -47,11 +47,10 @@ public class ShoeServiceImpl implements ShoeService {
 
     @Override
     public List<Shoe> findByColor(String color) {
-        return shoeRepository.findAllByColor(color);
+        return shoeRepository.findByColor(color);
     }
 
-    private Shoe mapShoeFoundByShoeInParamter(Shoe shoe, Shoe shoeInDB) {
-
+    private Shoe mapShoeFoundByShoeInParameter(Shoe shoe, Shoe shoeInDB) {
         shoeInDB.setBrand(shoe.getBrand());
         shoeInDB.setColor(shoe.getColor());
         shoeInDB.setName(shoe.getName());
