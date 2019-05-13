@@ -20,7 +20,7 @@ public class SwaggerConfig {
 
         return new Docket(DocumentationType.SWAGGER_2).select()
                 .apis(RequestHandlerSelectors
-                        .basePackage("com.hassan.restController"))
+                        .basePackage("com.hassan.restcontroller"))
                 .paths(PathSelectors.regex("/.*"))
                 .build().apiInfo(apiEndPointsInfo());
     }

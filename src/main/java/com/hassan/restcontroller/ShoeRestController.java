@@ -1,4 +1,4 @@
-package com.hassan.restController;
+package com.hassan.restcontroller;
 
 import com.hassan.model.Shoe;
 import com.hassan.service.ShoeServiceImpl;
@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.websocket.server.PathParam;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
-@Api(value="Shoes Management System", description="Management of the shoes into management system")
+@Api(value="Shoes Management System")
 public class ShoeRestController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class ShoeRestController {
      * @param shoe
      * @return
      */
-    @PostMapping("/shoe")
+    @PostMapping(path = "/shoe")
     @ApiOperation(value = "Add a shoe into data base")
     public ResponseEntity addShoe(@RequestBody Shoe shoe){
 
@@ -52,7 +52,7 @@ public class ShoeRestController {
     public ResponseEntity getAll(){
 
         List<Shoe> shoeList = shoeService.getAll();
-        if(shoeList.size() == 0)
+        if(shoeList.isEmpty())
             return new ResponseEntity("The list is empty",HttpStatus.ACCEPTED);
 
         return new ResponseEntity(shoeList,HttpStatus.OK);
@@ -69,7 +69,7 @@ public class ShoeRestController {
     public ResponseEntity getShoesByColor(@PathVariable("color") String color){
 
         List<Shoe> shoesList = shoeService.findByColor(color);
-        if(shoesList.size() ==0){
+        if(shoesList.isEmpty()){
             return new ResponseEntity("No shoe found", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity(shoesList,HttpStatus.OK);
@@ -107,11 +107,11 @@ public class ShoeRestController {
             return new ResponseEntity("Shoe with id : " + id + " is not exist", HttpStatus.NOT_FOUND);
 
         try {
-            Long deleteShoe = shoeService.deleteShoe(shoe.getIdShoe());
+            shoeService.deleteShoe(shoe.getIdShoe());
             return new ResponseEntity("shoe with id : " + id + " is deleted " , HttpStatus.OK);
         }
         catch (Exception ex){
-            ex.printStackTrace();
+            Logger.getLogger(ex.toString());
         }
         return new ResponseEntity("This shoe can not be deleted !! " , HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -143,8 +143,8 @@ public class ShoeRestController {
      * @param shoe
      * @return
      */
-    @PutMapping("/shoe")
     @ApiOperation(value = "Update a shoe In Data Base")
+    @PutMapping("/shoe")
     public ResponseEntity updateShoe(@RequestBody Shoe shoe){
 
         Shoe shoeAdded = shoeService.updateShoe(shoe);
@@ -152,7 +152,6 @@ public class ShoeRestController {
             return new ResponseEntity("shoe can not be updated ", HttpStatus.INTERNAL_SERVER_ERROR);
         else
             return new ResponseEntity(shoeAdded,HttpStatus.OK);
-
     }
 
 }
