@@ -38,6 +38,10 @@
             <version>3.3.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
 
         <!-- exclude junit 4 -->
         <dependency>
@@ -65,13 +69,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.15</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>false</optional>
         </dependency>
 
         <dependency>
@@ -93,15 +90,13 @@
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
-        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/javax.security/jaas -->
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -109,7 +104,17 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.25.1</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.25.1</version>
+        </dependency>
     </dependencies>
 
     <build>

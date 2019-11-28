@@ -85,4 +85,16 @@ public class Shoe {
     public void setColor(String color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return "Shoe{" +
+                "idShoe=" + idShoe +
+                ", name='" + name + '\'' +
+                ", size=" + size +
+                ", brand='" + brand + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
